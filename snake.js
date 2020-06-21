@@ -1,7 +1,7 @@
 class Block {
-    constructor(gWidth, gHeight) {
-        this.gWidth = gWidth;
-        this.gHeight = gHeight;
+    constructor(game) {
+        this.gWidth = game.gWidth;
+        this.gHeight = game.gHeight;
         this.block_size = 25;
         this.color = '#000';
         this.position = [
@@ -23,8 +23,8 @@ class Block {
 }
 
 export class Snake extends Block {
-    constructor(gWidth, gHeight) {
-        super(gWidth, gHeight)
+    constructor(game) {
+        super(game)
         this.color = '#0f0';
         this.speed = {
             x: 0,
@@ -32,11 +32,12 @@ export class Snake extends Block {
         };
         
         this.direction;
+        this.dead = false;
         
         this.position = [
             {
-                x: (gWidth - this.block_size) / 2,
-                y: (gHeight - this.block_size) / 2
+                x: (game.gWidth - this.block_size) / 2,
+                y: (game.gHeight - this.block_size) / 2
             }
         ];
     }
@@ -80,7 +81,7 @@ export class Snake extends Block {
     checkCollision(lead) {
         for (let i = 1; i < this.position.length; i++) {
             if (this.position[i].x == lead.x && this.position[i].y == lead.y) {
-                alert('Game Over');
+                this.dead = true;
             }
         }
     }
@@ -106,17 +107,18 @@ export class Snake extends Block {
         
         leadingPos = this.checkOffScreen(leadingPos);
         
-        this.checkCollision(leadingPos);
         this.position.unshift(leadingPos);
         this.position.pop();
+        this.checkCollision(leadingPos);
         
     }
 }
 
 export class Snack extends Block {
-    constructor(gWidth, gHeight) {
-        super(gWidth, gHeight);
+    constructor(game) {
+        super(game);
         this.color = '#f00';
+        this.relocate(game.snake);
     }
     
     relocate(snake) {

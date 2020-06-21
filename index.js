@@ -1,5 +1,4 @@
-import {Snake, Snack} from './snake.js';
-import InputHandler from './input.js';
+import Game from './game.js';
 
 let canvas = document.getElementById('game');
 let ctx = canvas.getContext('2d');
@@ -11,10 +10,7 @@ let fpsInterval = 1000 / fps;
 let elapsed, now;
 let last = 0;
 
-let snake = new Snake(GAME_WIDTH, GAME_HEIGHT);
-let snack = new Snack(GAME_WIDTH, GAME_HEIGHT);
-snack.relocate(snake);
-new InputHandler(snake);
+let game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
 function gameLoop(timestamp) {
     now = timestamp;
@@ -22,10 +18,8 @@ function gameLoop(timestamp) {
     if (elapsed > fpsInterval) {
         last = now;
         ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-        snake.update();
-        snack.checkEaten(snake);
-        snake.draw(ctx);
-        snack.draw(ctx);
+        game.update();
+        game.draw(ctx);
     }
     requestAnimationFrame(gameLoop);
     

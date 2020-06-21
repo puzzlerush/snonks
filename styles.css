@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'ff6';
+  src:  url('https://tacticaltofu.github.io/assets/fonts/ff6font.woff2') format('woff2'),
+        url('https://tacticaltofu.github.io/assets/fonts/ff6font.woff') format('woff'),
+        url('https://tacticaltofu.github.io/assets/fonts/ff6font.ttf') format('truetype');
+}
+
 body {
 	margin: 0;
 	background-color: black;
