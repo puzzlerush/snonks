@@ -78,9 +78,10 @@ export class Snake extends Block {
         
     }
     
-    checkCollision(lead) {
+    checkCollision() {
+        let head = this.position[0];
         for (let i = 1; i < this.position.length; i++) {
-            if (this.position[i].x == lead.x && this.position[i].y == lead.y) {
+            if (this.position[i].x == head.x && this.position[i].y == head.y) {
                 this.dead = true;
             }
         }
@@ -109,7 +110,7 @@ export class Snake extends Block {
         
         this.position.unshift(leadingPos);
         this.position.pop();
-        this.checkCollision(leadingPos);
+        this.checkCollision();
         
     }
 }
