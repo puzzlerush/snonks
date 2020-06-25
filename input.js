@@ -34,6 +34,7 @@ export default class InputHandler {
                 // reset
                 case 82:
                     game.reset();
+                    break;
             }
         })
     }

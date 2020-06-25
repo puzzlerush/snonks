@@ -85,8 +85,12 @@ export default class Game {
     
     reset() {
         this.gamestate = GAMESTATE.MENU;
-        this.snake = new Snake(this);
-        this.snack = new Snack(this);
-        new InputHandler(this.snake, this);
+        this.snake.position = [
+            {
+                x: (this.gWidth - this.snake.block_size) / 2,
+                y: (this.gHeight - this.snake.block_size) / 2
+            }
+        ];
+        this.snack.relocate(this.snake);
     }
 }
