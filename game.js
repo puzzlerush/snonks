@@ -84,7 +84,7 @@ export default class Game {
     }
     
     reset() {
-        this.gamestate = GAMESTATE.MENU;
+        this.snake.dead = false;
         this.snake.position = [
             {
                 x: (this.gWidth - this.snake.block_size) / 2,
@@ -92,5 +92,6 @@ export default class Game {
             }
         ];
         this.snack.relocate(this.snake);
+        this.gamestate = GAMESTATE.MENU;
     }
 }
