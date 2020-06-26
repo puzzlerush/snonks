@@ -32,6 +32,7 @@ export class Snake extends Block {
         };
         
         this.direction;
+        this.turnedThisFrame = false;
         this.dead = false;
         
         this.position = [
@@ -43,37 +44,41 @@ export class Snake extends Block {
     }
     
     moveLeft() {
-        if (this.direction != 'right') {
+        if (this.direction != 'right' && this.turnedThisFrame == false) {
             this.direction = 'left';
             this.speed.x = -this.block_size;
             this.speed.y = 0;
+            this.turnedThisFrame = true;
             
         }
     }
     
     moveRight() {
-        if (this.direction != 'left') {
+        if (this.direction != 'left' && this.turnedThisFrame == false) {
             this.direction = 'right';
             this.speed.x = this.block_size;
             this.speed.y = 0;
+            this.turnedThisFrame = true;
         }
         
     }
     
     moveUp() {
-        if (this.direction != 'down') {
+        if (this.direction != 'down' && this.turnedThisFrame == false) {
             this.direction = 'up';
             this.speed.x = 0;
             this.speed.y = -this.block_size;
+            this.turnedThisFrame = true;
         }
         
     }
     
     moveDown() {
-        if (this.direction != 'up') {
+        if (this.direction != 'up' && this.turnedThisFrame == false) {
             this.direction = 'down';
             this.speed.x = 0;
             this.speed.y = this.block_size;
+            this.turnedThisFrame = true;
         }
         
     }
@@ -111,6 +116,7 @@ export class Snake extends Block {
         this.position.unshift(leadingPos);
         this.position.pop();
         this.checkCollision();
+        this.turnedThisFrame = false;
         
     }
 }
